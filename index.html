@@ -1,437 +1,961 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ntige Pastries – Freshly Baked Happiness Every Day</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="alternate icon" href="favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-    h1, h2, h3, .font-display { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; }
-    
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes waFloat { 0%,100% { box-shadow: 0 6px 24px rgba(37,211,102,.4); } 50% { box-shadow: 0 12px 36px rgba(37,211,102,.55); } }
-    
-    .rv { opacity: 0; transition: all .85s cubic-bezier(.22,1,.36,1); }
-    .rv.show { opacity: 1; transform: none !important; }
-    .rv.d1 { transition-delay: .12s; } .rv.d2 { transition-delay: .24s; } .rv.d3 { transition-delay: .36s; }
-    .rv.d4 { transition-delay: .48s; } .rv.d5 { transition-delay: .6s; }
-    .rv.up { transform: translateY(50px); } .rv.lt { transform: translateX(-50px); }
-    .rv.rt { transform: translateX(50px); } .rv.sc { transform: scale(.88); }
-    
-    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ntige Pastries — Freshly Made Pastries for Every Occasion | Port Harcourt, Nigeria</title>
+<meta name="description" content="Ntige Pastries - Pastry Chef in Nigeria. Cakes, Meatpie, Egg roll, Chin chin, Small chops, Parfait, Zobo & more. 100% quality guarantee. Order on WhatsApp.">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.min.css">
+<style type="text/tailwindcss">
+  :root {
+    --ntige-red: #E30613;
+    --ntige-red-deep: #b80510;
+    --ntige-black: #0f0f10;
+    --ntige-soft: #fdf6f1;
+    --ntige-cream: #fcf3ec;
+    --ntige-stone: #6a6764;
+  }
+  body {
+    font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+    background-color: #fcfaf8;
+    color: #161615;
+    -webkit-font-smoothing: antialiased;
+  }
+  .display {
+    font-family: 'Fraunces', Georgia, serif;
+  }
+  .ntige-red { color: var(--ntige-red); }
+  .bg-ntige-red { background-color: var(--ntige-red); }
+  .bg-ntige-black { background-color: var(--ntige-black); }
+  .border-ntige-red { border-color: var(--ntige-red); }
+  /* Preloader */
+  #preloader {
+    position: fixed; inset:0; z-index: 9999;
+    background: #0f0f10;
+    display:flex; align-items:center; justify-content:center;
+    transition: opacity .6s ease, visibility .6s ease;
+  }
+  #preloader.hide { opacity:0; visibility:hidden; pointer-events:none; }
+  .ntige-loader-mark {
+    width: 80px; height: 80px;
+    border-radius: 999px;
+    border: 2px solid rgba(255,255,255,0.12);
+    position: relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .ntige-loader-mark::before {
+    content:'';
+    position:absolute; inset:-2px;
+    border-radius: 999px;
+    border:2px solid transparent;
+    border-top-color: var(--ntige-red);
+    animation: spin 1.05s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loader-n { font-family: 'Fraunces', serif; font-weight:800; font-size:34px; color:#fff; letter-spacing:-1px; }
+  .loader-bar-track { width:140px; height:3px; background: rgba(255,255,255,.13); border-radius:4px; overflow:hidden; margin-top:18px;}
+  .loader-bar-fill { height:100%; width:0%; background: var(--ntige-red); border-radius:4px; animation: fillUp 3.3s cubic-bezier(.65,0,.3,1) forwards;}
+  @keyframes fillUp { to { width:100%; } }
+
+  /* Reveal animations */
+  .reveal { opacity:0; transform: translateY(28px); transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity:1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .18s; }
+  .reveal-delay-3 { transition-delay: .26s; }
+
+  .hero-noise {
+    background-image: radial-gradient(rgba(0,0,0,0.035) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+  .soft-shadow { box-shadow: 0 16px 48px rgba(22,15,12,0.08); }
+  .card-hover { transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease; }
+  .card-hover:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(18,11,9,0.13); }
+  .menu-img { transition: transform .65s cubic-bezier(.22,1,.36,1); }
+  .menu-card:hover .menu-img { transform: scale(1.055); }
+  html { scroll-behavior: smooth; }
+  .red-gradient {
+    background: linear-gradient(135deg, #e30613 0%, #c90411 55%, #9e030d 100%);
+  }
+  .btn-primary {
+    background: var(--ntige-red);
+    color: #fff;
+    transition: all .22s ease;
+  }
+  .btn-primary:hover { background: #c90411; transform: translateY(-1px); box-shadow: 0 10px 28px rgba(227,6,19,.28);}
+  .btn-dark {
+    background: #181818;
+    color:#fff;
+    transition: all .22s ease;
+  }
+  .btn-dark:hover { background:#000; transform: translateY(-1px);}
+  .btn-ghost {
+    border:1.5px solid #d9d3ce;
+    background:#fff;
+    color:#1a1a1a;
+    transition: all .2s ease;
+  }
+  .btn-ghost:hover { border-color:#1a1a1a; background:#f8f4f0;}
+  .badge-red {
+    background: #fff1f1;
+    color: #d30012;
+    border:1px solid #ffd4d7;
+  }
+  .product-label {
+    font-size: 11px;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: #9a8d84;
+    font-weight: 650;
+  }
+  /* floating wa */
+  .wa-float {
+    box-shadow: 0 10px 30px rgba(22,163,74,.32), 0 2px 8px rgba(0,0,0,.13);
+  }
+
+  /* Filter buttons */
+  .filter-btn {
+    padding: 9px 20px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 650;
+    border: 1.5px solid #e0d5cc;
+    background: #fff;
+    color: #4a4441;
+    cursor: pointer;
+    transition: all .22s cubic-bezier(.22,1,.36,1);
+    white-space: nowrap;
+  }
+  .filter-btn:hover {
+    border-color: #E30613;
+    color: #E30613;
+    background: #fff4f4;
+  }
+  .filter-btn.active-filter {
+    background: #E30613;
+    color: #fff;
+    border-color: #E30613;
+    box-shadow: 0 6px 20px rgba(227,6,19,0.22);
+  }
+  /* Product item animation */
+  .product-item {
+    transition: opacity .38s ease, transform .38s cubic-bezier(.22,1,.36,1);
+  }
+  .product-item.hiding {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+    pointer-events: none;
+  }
+  .product-item.hidden-item {
+    display: none;
+  }
+  .product-item.showing {
+    animation: itemShow .4s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes itemShow {
+    from { opacity:0; transform: scale(0.95) translateY(14px); }
+    to   { opacity:1; transform: scale(1) translateY(0); }
+  }
+  /* Modal */
+  #product-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #product-modal.open #modal-panel {
+    transform: translateY(0) scale(1);
+  }
+  #modal-panel {
+    transition: transform .35s cubic-bezier(.22,1,.36,1);
+  }
+  /* Nav red underline */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -3px;
+    width: 0; height: 2px;
+    background: #E30613;
+    border-radius: 2px;
+    transition: width .25s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+  /* Mobile bottom action bar */
+  #mobile-action-bar {
+    position: fixed;
+    bottom: 0; left:0; right:0;
+    z-index: 45;
+    background: rgba(252, 250, 248, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid #e8e0d9;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    display: none;
+  }
+  @media (max-width: 767px) {
+    #mobile-action-bar { display: flex; }
+    body { padding-bottom: 74px; }
+  }
+</style>
 </head>
-<body class="bg-[#FFFBF7] text-[#3C2521] antialiased selection:bg-[#D4A017]/20">
-  
-  <!-- LOADER -->
-  <div id="loader" class="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-[#FFFBF7] transition-opacity duration-700">
-    <div class="relative">
-      <div class="absolute -inset-6 animate-spin rounded-full border-[3px] border-transparent border-t-[#D4A017]" style="animation-duration:1.2s"></div>
-      <div class="absolute -inset-3 animate-spin rounded-full border-[2px] border-transparent border-b-[#FADCD9]" style="animation-duration:1.8s;animation-direction:reverse"></div>
-      <div class="flex h-[80px] w-[80px] items-center justify-center rounded-[24px] bg-gradient-to-br from-[#D4A017] to-[#C29B56] shadow-lg">
-        <svg width="38" height="38" viewBox="0 0 24 24" fill="none"><path d="M12 2L13.8 8.2H20.4L15.1 12.1L16.9 18.3L12 14.4L7.1 18.3L8.9 12.1L3.6 8.2H10.2L12 2Z" fill="white" fill-opacity=".95"/></svg>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader" aria-hidden="true">
+  <div class="flex flex-col items-center">
+    <div class="ntige-loader-mark">
+      <span class="loader-n">N</span>
+    </div>
+    <div class="mt-5 text-center">
+      <div class="display text-white text-[22px] tracking-tight font-[700]">Ntige Pastries</div>
+      <div class="text-[11px] uppercase tracking-widest text-zinc-400 mt-1">Port Harcourt • Nigeria</div>
+    </div>
+    <div class="loader-bar-track"><div class="loader-bar-fill"></div></div>
+    <div class="text-[11px] text-zinc-500 mt-3 tracking-wider">FRESHLY BAKED</div>
+  </div>
+</div>
+
+<!-- Header -->
+<header id="site-header" class="sticky top-0 z-40 bg-[#fcfaf8]/90 backdrop-blur-xl border-b border-[#ece5df] transition-all duration-300">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10">
+    <div class="h-[74px] flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-ntige-black flex items-center justify-center text-white display font-[800] text-[19px]">N</div>
+        <div>
+          <div class="display font-[800] text-[20px] tracking-tight leading-tight text-zinc-900">Ntige</div>
+          <div class="text-[10.5px] tracking-[0.18em] text-zinc-500 -mt-0.5 font-[600]">PASTRIES</div>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-9 text-[15px] font-[550] text-zinc-700">
+        <a href="#menu" class="nav-link relative hover:text-[#E30613] transition-colors duration-200">Menu</a>
+        <a href="#cakes" class="nav-link relative hover:text-[#E30613] transition-colors duration-200">Cakes</a>
+        <a href="#why" class="nav-link relative hover:text-[#E30613] transition-colors duration-200">Why Us</a>
+        <a href="#contact" class="nav-link relative hover:text-[#E30613] transition-colors duration-200">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/2348037998324?text=Hi%20Ntige%20Pastries!%20I'd%20like%20to%20place%20an%20order." target="_blank" class="hidden sm:inline-flex btn-primary rounded-full px-5 py-2.5 text-[14px] font-[650]">
+          Order Now
+        </a>
+        <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 rounded-full border border-[#ddd5cc] flex items-center justify-center text-zinc-700 bg-white">
+          <i class="ri-menu-line text-xl"></i>
+        </button>
       </div>
     </div>
-    <h1 class="mt-8 font-display text-[42px] tracking-[-.03em] text-[#3C2521]" style="animation:fadeUp .8s ease-out both">Ntige</h1>
-    <p class="mt-2 text-[14px] font-medium uppercase tracking-[.16em] text-[#9C7C6B]" style="animation:fadeUp .8s ease-out .2s both">Pastries</p>
-    <div class="mt-8 flex gap-2" style="animation:fadeUp .6s ease-out .5s both">
-      <span class="h-2 w-2 rounded-full bg-[#D4A017] animate-bounce" style="animation-delay:0s;animation-duration:.7s"></span>
-      <span class="h-2 w-2 rounded-full bg-[#D4A017] animate-bounce" style="animation-delay:.15s;animation-duration:.7s"></span>
-      <span class="h-2 w-2 rounded-full bg-[#D4A017] animate-bounce" style="animation-delay:.3s;animation-duration:.7s"></span>
+  </div>
+  <!-- Mobile nav drawer -->
+  <div id="mobile-menu" class="lg:hidden hidden border-t border-[#ece5df] bg-[#fdfbf9]">
+    <div class="px-5 py-4 flex flex-col gap-3 text-[16px] font-[550] text-zinc-700">
+      <a href="#menu" class="py-1.5 mobile-nav-link">Menu</a>
+      <a href="#cakes" class="py-1.5 mobile-nav-link">Cakes</a>
+      <a href="#why" class="py-1.5 mobile-nav-link">Why Us</a>
+      <a href="#contact" class="py-1.5 mobile-nav-link">Contact</a>
+      <a href="https://wa.me/2348037998324?text=Hi%20Ntige%20Pastries!%20I'd%20like%20to%20place%20an%20order." target="_blank" class="mt-1 btn-primary rounded-full px-4 py-3 text-center font-[680]">Order on WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="relative overflow-hidden hero-noise">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 pt-14 sm:pt-20 lg:pt-28 pb-16 lg:pb-24">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <!-- Left copy -->
+        <div class="lg:col-span-6">
+          <div class="reveal">
+            <div class="inline-flex items-center gap-2 bg-white border border-[#eadfd5] rounded-full px-3.5 py-1.5 text-[12.5px] font-[600] text-zinc-600 shadow-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-ntige-red"></span>
+              Pastry Chef • Port Harcourt, Nigeria
+            </div>
+          </div>
+          <h1 class="reveal display text-[54px] sm:text-[76px] lg:text-[92px] leading-[0.89] tracking-[-0.03em] font-[800] text-[#151413] mt-6">
+            Ntige<br>
+            <span class="ntige-red italic font-[600]">Pastries</span>
+          </h1>
+          <p class="reveal reveal-delay-1 display text-[23px] sm:text-[26px] text-zinc-700 mt-5 leading-snug">
+            Freshly made pastries for every occasion
+          </p>
+          <p class="reveal reveal-delay-1 text-[16.5px] sm:text-[17.5px] text-zinc-600 mt-4 max-w-[520px] leading-relaxed">
+            Pastry Chef 🎂 Cakes, Meatpie, Egg roll, Chin chin, Small chops, Parfait & other tasty snacks. 🍹 Drinks: Zobo. 100% quality guarantee.
+          </p>
+
+          <div class="reveal reveal-delay-2 flex flex-wrap gap-3 mt-7">
+            <a href="https://wa.me/2348037998324?text=Hi%20Ntige%20Pastries!%20I'd%20like%20to%20place%20an%20order%20today." target="_blank" class="btn-primary rounded-full px-6 sm:px-7 py-3.5 sm:py-4 text-[15.5px] font-[680] inline-flex items-center gap-2">
+              Order Now
+              <i class="ri-arrow-right-up-line text-[18px]"></i>
+            </a>
+            <a href="#menu" class="btn-ghost rounded-full px-6 sm:px-7 py-3.5 sm:py-4 text-[15.5px] font-[640]">
+              View Menu
+            </a>
+          </div>
+
+          <div class="reveal reveal-delay-3 flex flex-wrap items-center gap-6 mt-7 text-[13.8px] text-zinc-600 font-[500]">
+            <div class="flex items-center gap-2"><i class="ri-check-line text-emerald-600 text-lg"></i> 100% Quality Guarantee</div>
+            <div class="flex items-center gap-2"><i class="ri-flashlight-line text-zinc-500 text-lg"></i> Fast Delivery</div>
+            <div class="flex items-center gap-2"><i class="ri-cake-3-line text-zinc-500 text-lg"></i> All Occasions</div>
+          </div>
+        </div>
+
+        <!-- Right visual -->
+        <div class="lg:col-span-6 relative reveal">
+          <div class="relative mx-auto max-w-[520px]">
+            <!-- red accent shape -->
+            <div class="absolute -right-6 -top-6 w-[150px] h-[150px] rounded-[36px] bg-ntige-red opacity-[0.09] rotate-12 hidden sm:block"></div>
+            <div class="relative bg-white rounded-[30px] soft-shadow p-3 sm:p-4">
+              <img src="https://images.pexels.com/photos/9328424/pexels-photo-9328424.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Freshly baked meat pies - Ntige Pastries" class="w-full h-[420px] sm:h-[520px] object-cover rounded-[22px]">
+              <!-- floating stat cards -->
+              <div class="absolute left-4 sm:left-[-22px] top-[58px] bg-white rounded-2xl shadow-[0_14px_40px_rgba(0,0,0,.13)] px-4 py-3 border border-zinc-100">
+                <div class="text-[11px] text-zinc-500 uppercase tracking-wider font-[700]">Fresh Daily</div>
+                <div class="display text-[18px] font-[700] text-zinc-900">6AM – Bake</div>
+              </div>
+              <div class="absolute right-4 sm:right-[-18px] bottom-[46px] bg-[#141414] text-white rounded-2xl shadow-[0_14px_40px_rgba(0,0,0,.28)] px-4 py-3">
+                <div class="text-[11px] text-zinc-300 uppercase tracking-wider font-[700]">Customer Love</div>
+                <div class="flex items-center gap-1 mt-1 text-amber-400 text-[13px]">
+                  <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                </div>
+                <div class="text-[12px] text-zinc-300">PH Favourite</div>
+              </div>
+            </div>
+            <!-- small supporting image -->
+            <div class="absolute -left-4 sm:-left-10 -bottom-6 w-32 sm:w-40 bg-white rounded-[22px] shadow-xl p-2 rotate-[-6deg] hidden sm:block">
+              <img src="https://images.pexels.com/photos/13988870/pexels-photo-13988870.jpeg?auto=compress&cs=tinysrgb&w=600" class="w-full h-28 object-cover rounded-[14px]" alt="Chin chin">
+              <div class="text-[11.5px] font-[650] text-zinc-700 pt-1.5 px-1 pb-1">Signature Chin Chin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- trust strip -->
+      <div class="mt-14 lg:mt-20 border-t border-[#e7ddd4] pt-8 flex flex-wrap items-center justify-between gap-6 text-[13.8px] text-zinc-600">
+        <div class="font-[600] text-zinc-700">Loved across Port Harcourt for:</div>
+        <div class="flex flex-wrap gap-x-7 gap-y-2 text-zinc-600">
+          <span>Meatpies</span>
+          <span>•</span>
+          <span>Small Chops Platters</span>
+          <span>•</span>
+          <span>Celebration Cakes</span>
+          <span>•</span>
+          <span>Zobo & Parfait</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU / PRODUCTS -->
+  <section id="menu" class="py-20 sm:py-28 bg-white border-t border-[#efe7e0]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="max-w-2xl reveal">
+        <div class="product-label">Our Menu — Freshly Handmade</div>
+        <h2 class="display text-[40px] sm:text-[54px] leading-[1.06] tracking-[-0.02em] font-[800] mt-3 text-zinc-900">
+          Pastries that make<br>people come back.
+        </h2>
+        <p class="text-zinc-600 mt-4 text-[17px] leading-relaxed">
+          Every bite is baked with premium ingredients, perfect spice, and real Nigerian flavour. Made-to-order for events, cravings, and everyday joy.
+        </p>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="reveal flex flex-wrap gap-2.5 mt-10" id="filter-bar">
+        <button class="filter-btn active-filter" data-filter="all">All Items</button>
+        <button class="filter-btn" data-filter="pastries">🥐 Pastries</button>
+        <button class="filter-btn" data-filter="snacks">🍢 Snacks</button>
+        <button class="filter-btn" data-filter="cakes-cat">🎂 Cakes</button>
+        <button class="filter-btn" data-filter="drinks">🍹 Drinks & Desserts</button>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 mt-10" id="menu-grid">
+
+        <!-- Meatpie -->
+        <div class="menu-card product-item" data-category="pastries" data-name="Meatpie" data-desc="Flaky, buttery crust, richly seasoned minced meat filling. Port Harcourt classic." data-img="https://images.pexels.com/photos/9328424/pexels-photo-9328424.jpeg?auto=compress&cs=tinysrgb&w=900" data-badge="Bestseller" data-wa="I'd+like+to+order+Meatpie">
+          <div class="rounded-[26px] overflow-hidden bg-[#f9f3ee] border border-[#efe3d7] relative group">
+            <img class="menu-img w-full h-[238px] object-cover" src="https://images.pexels.com/photos/9328424/pexels-photo-9328424.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Meatpie">
+            <div class="img-overlay absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-400"></div>
+            <button class="quick-view-btn absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center text-zinc-800 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#E30613] hover:text-white">
+              <i class="ri-add-line text-[20px]"></i>
+            </button>
+            <div class="popular-badge absolute top-3 left-3 bg-zinc-900/85 text-white text-[11px] font-[700] px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#E30613] inline-block"></span> POPULAR
+            </div>
+          </div>
+          <div class="pt-4 px-1">
+            <div class="flex items-start justify-between gap-2">
+              <h3 class="display text-[21px] font-[700] leading-tight">Meatpie</h3>
+              <span class="badge-red text-[10.5px] font-[700] px-2.5 py-1 rounded-full whitespace-nowrap mt-0.5">Bestseller</span>
+            </div>
+            <p class="text-[14.5px] text-zinc-600 mt-1.5 leading-relaxed">Flaky, buttery crust, richly seasoned minced meat filling. Port Harcourt classic.</p>
+            <div class="mt-3">
+              <button class="order-quick-btn bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full px-4 py-1.5 text-[13px] font-[680] flex items-center gap-1 transition-all">Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Small Chops -->
+        <div class="menu-card product-item" data-category="snacks" data-name="Small Chops" data-desc="Party-perfect samosa, spring rolls, puff puff & more. Platters for events and celebrations." data-img="https://images.pexels.com/photos/29037272/pexels-photo-29037272.jpeg?auto=compress&cs=tinysrgb&w=900" data-badge="Party Fav" data-wa="I'd+like+to+order+Small+Chops+platter">
+          <div class="rounded-[26px] overflow-hidden bg-[#f9f3ee] border border-[#efe3d7] relative group">
+            <img class="menu-img w-full h-[238px] object-cover" src="https://images.pexels.com/photos/29037272/pexels-photo-29037272.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Small Chops">
+            <div class="img-overlay absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-400"></div>
+            <button class="quick-view-btn absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center text-zinc-800 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#E30613] hover:text-white">
+              <i class="ri-add-line text-[20px]"></i>
+            </button>
+            <div class="popular-badge absolute top-3 left-3 bg-zinc-900/85 text-white text-[11px] font-[700] px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#E30613] inline-block"></span> PARTY FAV
+            </div>
+          </div>
+          <div class="pt-4 px-1">
+            <h3 class="display text-[21px] font-[700]">Small Chops</h3>
+            <p class="text-[14.5px] text-zinc-600 mt-1.5 leading-relaxed">Party samosa, spring rolls, puff puff & more. Platters for events.</p>
+            <div class="mt-3">
+              <button class="order-quick-btn bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full px-4 py-1.5 text-[13px] font-[680] flex items-center gap-1 transition-all">Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chin Chin -->
+        <div class="menu-card product-item" data-category="snacks" data-name="Chin Chin" data-desc="Crunchy, milky, perfectly sweet. Snack jars & bulk packs available. Our signature recipe." data-img="https://images.pexels.com/photos/13988870/pexels-photo-13988870.jpeg?auto=compress&cs=tinysrgb&w=900" data-badge="" data-wa="I'd+like+to+order+Chin+Chin">
+          <div class="rounded-[26px] overflow-hidden bg-[#f9f3ee] border border-[#efe3d7] relative group">
+            <img class="menu-img w-full h-[238px] object-cover" src="https://images.pexels.com/photos/13988870/pexels-photo-13988870.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Chin Chin">
+            <div class="img-overlay absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-400"></div>
+            <button class="quick-view-btn absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center text-zinc-800 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#E30613] hover:text-white">
+              <i class="ri-add-line text-[20px]"></i>
+            </button>
+          </div>
+          <div class="pt-4 px-1">
+            <h3 class="display text-[21px] font-[700]">Chin Chin</h3>
+            <p class="text-[14.5px] text-zinc-600 mt-1.5 leading-relaxed">Crunchy, milky, perfectly sweet. Snack jars & bulk packs available.</p>
+            <div class="mt-3">
+              <button class="order-quick-btn bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full px-4 py-1.5 text-[13px] font-[680] flex items-center gap-1 transition-all">Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fish Roll / Egg Roll -->
+        <div class="menu-card product-item" data-category="pastries" data-name="Fish Roll / Egg Roll" data-desc="Soft dough, savoury filling. Golden-fried to fluffy perfection. Fresh out the fryer daily." data-img="https://images.pexels.com/photos/1082344/pexels-photo-1082344.jpeg?auto=compress&cs=tinysrgb&w=900" data-badge="" data-wa="I'd+like+to+order+Fish+Roll+%2F+Egg+Roll">
+          <div class="rounded-[26px] overflow-hidden bg-[#f9f3ee] border border-[#efe3d7] relative group">
+            <img class="menu-img w-full h-[238px] object-cover" src="https://images.pexels.com/photos/1082344/pexels-photo-1082344.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Fish Roll / Egg Roll">
+            <div class="img-overlay absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-400"></div>
+            <button class="quick-view-btn absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center text-zinc-800 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#E30613] hover:text-white">
+              <i class="ri-add-line text-[20px]"></i>
+            </button>
+          </div>
+          <div class="pt-4 px-1">
+            <h3 class="display text-[21px] font-[700]">Fish Roll / Egg Roll</h3>
+            <p class="text-[14.5px] text-zinc-600 mt-1.5 leading-relaxed">Soft dough, savoury filling. Golden-fried to fluffy perfection.</p>
+            <div class="mt-3">
+              <button class="order-quick-btn bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full px-4 py-1.5 text-[13px] font-[680] flex items-center gap-1 transition-all">Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cakes -->
+        <div class="menu-card product-item" data-category="cakes-cat" data-name="Celebration Cakes" data-desc="Birthday, wedding, anniversary & celebration cakes. Custom designs, moist layers, beautiful finishes. Order 48hrs in advance." data-img="https://images.pexels.com/photos/34619683/pexels-photo-34619683.jpeg?auto=compress&cs=tinysrgb&w=900" data-badge="All Occasions" data-wa="I'd+like+to+order+a+Celebration+Cake">
+          <div class="rounded-[26px] overflow-hidden bg-[#f9f3ee] border border-[#efe3d7] relative group">
+            <img class="menu-img w-full h-[238px] object-cover" src="https://images.pexels.com/photos/34619683/pexels-photo-34619683.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Cakes">
+            <div class="img-overlay absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-400"></div>
+            <button class="quick-view-btn absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center text-zinc-800 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#E30613] hover:text-white">
+              <i class="ri-add-line text-[20px]"></i>
+            </button>
+            <div class="popular-badge absolute top-3 left-3 bg-zinc-900/85 text-white text-[11px] font-[700] px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#E30613] inline-block"></span> POPULAR
+            </div>
+          </div>
+          <div class="pt-4 px-1">
+            <div class="flex items-center justify-between gap-2">
+              <h3 class="display text-[21px] font-[700]">Celebration Cakes</h3>
+              <span class="text-[10.5px] font-[720] px-2.5 py-1 rounded-full bg-zinc-900 text-white whitespace-nowrap">All Occasions</span>
+            </div>
+            <p class="text-[14.5px] text-zinc-600 mt-1.5 leading-relaxed">Birthday, wedding, celebration. Custom designs, moist layers.</p>
+            <div class="mt-3">
+              <button class="order-quick-btn bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full px-4 py-1.5 text-[13px] font-[680] flex items-center gap-1 transition-all">Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shawarma -->
+        <div class="menu-card product-item" data-category="snacks" data-name="Shawarma" data-desc="Loaded wraps, creamy sauce, grilled chicken or beef. Properly spicy and filling. A full meal in a wrap." data-img="https://images.pexels.com/photos/14639388/pexels-photo-14639388.jpeg?auto=compress&cs=tinysrgb&w=900" data-badge="" data-wa="I'd+like+to+order+Shawarma">
+          <div class="rounded-[26px] overflow-hidden bg-[#f9f3ee] border border-[#efe3d7] relative group">
+            <img class="menu-img w-full h-[238px] object-cover" src="https://images.pexels.com/photos/14639388/pexels-photo-14639388.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Shawarma">
+            <div class="img-overlay absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-400"></div>
+            <button class="quick-view-btn absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center text-zinc-800 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#E30613] hover:text-white">
+              <i class="ri-add-line text-[20px]"></i>
+            </button>
+          </div>
+          <div class="pt-4 px-1">
+            <h3 class="display text-[21px] font-[700]">Shawarma</h3>
+            <p class="text-[14.5px] text-zinc-600 mt-1.5 leading-relaxed">Loaded wraps, creamy sauce, grilled chicken/beef. Properly spicy.</p>
+            <div class="mt-3">
+              <button class="order-quick-btn bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full px-4 py-1.5 text-[13px] font-[680] flex items-center gap-1 transition-all">Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parfait -->
+        <div class="menu-card product-item" data-category="drinks" data-name="Parfait" data-desc="Creamy yoghurt, crunchy granola, fresh fruit layers. Cold, indulgent, and beautifully layered in a glass." data-img="https://images.pexels.com/photos/11182249/pexels-photo-11182249.jpeg?auto=compress&cs=tinysrgb&w=900" data-badge="" data-wa="I'd+like+to+order+Parfait">
+          <div class="rounded-[26px] overflow-hidden bg-[#f9f3ee] border border-[#efe3d7] relative group">
+            <img class="menu-img w-full h-[238px] object-cover" src="https://images.pexels.com/photos/11182249/pexels-photo-11182249.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Parfait">
+            <div class="img-overlay absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-400"></div>
+            <button class="quick-view-btn absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center text-zinc-800 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#E30613] hover:text-white">
+              <i class="ri-add-line text-[20px]"></i>
+            </button>
+          </div>
+          <div class="pt-4 px-1">
+            <h3 class="display text-[21px] font-[700]">Parfait</h3>
+            <p class="text-[14.5px] text-zinc-600 mt-1.5 leading-relaxed">Creamy yoghurt, granola crunch, fresh fruit layers. Cold & indulgent.</p>
+            <div class="mt-3">
+              <button class="order-quick-btn bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full px-4 py-1.5 text-[13px] font-[680] flex items-center gap-1 transition-all">Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zobo -->
+        <div class="menu-card product-item" data-category="drinks" data-name="Zobo Drink" data-desc="Chilled hibiscus, ginger & fruit infusion. Naturally sweetened, refreshing and pairs perfectly with all our pastries." data-img="https://images.pexels.com/photos/34566505/pexels-photo-34566505.jpeg?auto=compress&cs=tinysrgb&w=900" data-badge="" data-wa="I'd+like+to+order+Zobo+Drink">
+          <div class="rounded-[26px] overflow-hidden bg-[#f9f3ee] border border-[#efe3d7] relative group">
+            <img class="menu-img w-full h-[238px] object-cover" src="https://images.pexels.com/photos/34566505/pexels-photo-34566505.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Zobo Drink">
+            <div class="img-overlay absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-400"></div>
+            <button class="quick-view-btn absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center text-zinc-800 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#E30613] hover:text-white">
+              <i class="ri-add-line text-[20px]"></i>
+            </button>
+          </div>
+          <div class="pt-4 px-1">
+            <h3 class="display text-[21px] font-[700]">Zobo</h3>
+            <p class="text-[14.5px] text-zinc-600 mt-1.5 leading-relaxed">Chilled hibiscus, ginger & fruit infusion. The perfect pastry pairing.</p>
+            <div class="mt-3">
+              <button class="order-quick-btn bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full px-4 py-1.5 text-[13px] font-[680] flex items-center gap-1 transition-all">Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Milky Doughnut -->
+        <div class="menu-card product-item" data-category="pastries" data-name="Milky Doughnut" data-desc="Pillowy soft, glazed, milky doughnuts. Box of 6 or 12 for sharing — or not. Fresh, warm, and irresistible." data-img="https://images.pexels.com/photos/37220991/pexels-photo-37220991.jpeg?auto=compress&cs=tinysrgb&w=900" data-badge="" data-wa="I'd+like+to+order+Milky+Doughnuts">
+          <div class="rounded-[26px] overflow-hidden bg-[#f9f3ee] border border-[#efe3d7] relative group">
+            <img class="menu-img w-full h-[238px] object-cover" src="https://images.pexels.com/photos/37220991/pexels-photo-37220991.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Milky Doughnut">
+            <div class="img-overlay absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-400"></div>
+            <button class="quick-view-btn absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center text-zinc-800 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#E30613] hover:text-white">
+              <i class="ri-add-line text-[20px]"></i>
+            </button>
+          </div>
+          <div class="pt-4 px-1">
+            <h3 class="display text-[21px] font-[700]">Milky Doughnut</h3>
+            <p class="text-[14.5px] text-zinc-600 mt-1.5 leading-relaxed">Pillowy, glazed, milky-soft. Box of 6/12 for sharing (or not).</p>
+            <div class="mt-3">
+              <button class="order-quick-btn bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full px-4 py-1.5 text-[13px] font-[680] flex items-center gap-1 transition-all">Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spring Roll -->
+        <div class="menu-card product-item" data-category="snacks" data-name="Spring Rolls" data-desc="Crispy vegetable spring rolls, golden-fried. Perfect in every small chops tray. Order for birthdays, weddings, office parties & hangouts." data-img="https://images.pexels.com/photos/12103073/pexels-photo-12103073.jpeg?auto=compress&cs=tinysrgb&w=900" data-badge="Platter Fav" data-wa="I'd+like+to+order+Spring+Rolls">
+          <div class="rounded-[26px] overflow-hidden bg-[#f9f3ee] border border-[#efe3d7] relative group">
+            <img class="menu-img w-full h-[238px] object-cover" src="https://images.pexels.com/photos/12103073/pexels-photo-12103073.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Spring Roll">
+            <div class="img-overlay absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-400"></div>
+            <button class="quick-view-btn absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center text-zinc-800 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#E30613] hover:text-white">
+              <i class="ri-add-line text-[20px]"></i>
+            </button>
+            <div class="popular-badge absolute top-3 left-3 bg-zinc-900/85 text-white text-[11px] font-[700] px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#E30613] inline-block"></span> POPULAR
+            </div>
+          </div>
+          <div class="pt-4 px-1">
+            <h3 class="display text-[21px] font-[700]">Spring Rolls</h3>
+            <p class="text-[14.5px] text-zinc-600 mt-1.5 leading-relaxed">Crispy spring rolls, golden-fried. Perfect in every platter tray.</p>
+            <div class="mt-3">
+              <button class="order-quick-btn bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full px-4 py-1.5 text-[13px] font-[680] flex items-center gap-1 transition-all">Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Egg Roll -->
+        <div class="menu-card product-item" data-category="pastries" data-name="Egg Roll" data-desc="Soft, golden-fried dough wrapped around a whole boiled egg. Crispy outside, fluffy inside. A Port Harcourt street food favourite made premium." data-img="https://images.pexels.com/photos/13915068/pexels-photo-13915068.jpeg?auto=compress&cs=tinysrgb&w=900" data-badge="Street Fav" data-wa="I'd+like+to+order+Egg+Roll">
+          <div class="rounded-[26px] overflow-hidden bg-[#f9f3ee] border border-[#efe3d7] relative group">
+            <img class="menu-img w-full h-[238px] object-cover" src="https://images.pexels.com/photos/13915068/pexels-photo-13915068.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Egg Roll">
+            <div class="img-overlay absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-400"></div>
+            <button class="quick-view-btn absolute bottom-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center text-zinc-800 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#E30613] hover:text-white">
+              <i class="ri-add-line text-[20px]"></i>
+            </button>
+            <div class="popular-badge absolute top-3 left-3 bg-zinc-900/85 text-white text-[11px] font-[700] px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#E30613] inline-block"></span> STREET FAV
+            </div>
+          </div>
+          <div class="pt-4 px-1">
+            <h3 class="display text-[21px] font-[700]">Egg Roll</h3>
+            <p class="text-[14.5px] text-zinc-600 mt-1.5 leading-relaxed">Golden-fried dough around a whole boiled egg. Crispy outside, fluffy inside.</p>
+            <div class="mt-3">
+              <button class="order-quick-btn bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full px-4 py-1.5 text-[13px] font-[680] flex items-center gap-1 transition-all">Order →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty state -->
+        <div id="no-results" class="hidden col-span-3 py-14 text-center">
+          <div class="text-5xl mb-4">🍽️</div>
+          <div class="display text-[22px] font-[700] text-zinc-700">No items in this category yet</div>
+          <p class="text-zinc-500 mt-2">Check back soon or message us on WhatsApp.</p>
+        </div>
+
+      </div>
+
+      <div class="flex justify-center mt-12">
+        <a href="https://wa.me/2348037998324?text=Hi%20Ntige!%20Can%20I%20get%20today's%20full%20menu%20and%20prices?" target="_blank" class="btn-dark rounded-full px-6 py-3.5 text-[15px] font-[650] inline-flex items-center gap-2">
+          <i class="ri-whatsapp-line text-[18px] text-green-400"></i>
+          Get Full Menu on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT QUICK VIEW MODAL -->
+  <div id="product-modal" class="fixed inset-0 z-[200] flex items-end sm:items-center justify-center px-0 sm:px-4 pointer-events-none opacity-0 transition-opacity duration-300">
+    <!-- Backdrop -->
+    <div id="modal-backdrop" class="absolute inset-0 bg-black/55 backdrop-blur-sm"></div>
+    <!-- Panel -->
+    <div id="modal-panel" class="relative bg-white w-full sm:max-w-[520px] rounded-t-[32px] sm:rounded-[32px] overflow-hidden shadow-2xl translate-y-8 sm:translate-y-0 sm:scale-95 transition-all duration-350">
+      <img id="modal-img" src="" alt="" class="w-full h-[300px] sm:h-[340px] object-cover">
+      <button id="modal-close" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-zinc-800 shadow-md hover:bg-white transition text-[20px]">
+        <i class="ri-close-line"></i>
+      </button>
+      <div class="p-6 sm:p-7">
+        <h3 id="modal-name" class="display text-[26px] sm:text-[30px] font-[750] text-zinc-900"></h3>
+        <p id="modal-desc" class="text-zinc-600 text-[15.5px] mt-2 leading-relaxed"></p>
+        <div class="flex flex-col sm:flex-row gap-3 mt-6">
+          <a id="modal-wa-btn" href="#" target="_blank" class="flex-1 bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full py-3.5 text-center font-[700] text-[15.5px] flex items-center justify-center gap-2 transition">
+            <i class="ri-whatsapp-fill text-[20px]"></i> Order via WhatsApp
+          </a>
+          <button id="modal-close-2" class="flex-1 border border-zinc-200 text-zinc-800 rounded-full py-3.5 text-center font-[650] text-[15px] hover:bg-zinc-50 transition">Close</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- NAV -->
-  <nav class="sticky top-0 z-50 border-b border-[#FADCD9]/50 bg-[#FFFBF7]/90 backdrop-blur-xl">
-    <div class="mx-auto max-w-[1200px] px-6 sm:px-8">
-      <div class="flex h-[72px] items-center justify-between">
-        <a href="#" class="flex items-center gap-3">
-          <div class="flex h-10 w-10 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#D4A017] to-[#C29B56] shadow-[0_4px_20px_-4px_rgba(212,160,23,0.35)]">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L13.8 8.2H20.4L15.1 12.1L16.9 18.3L12 14.4L7.1 18.3L8.9 12.1L3.6 8.2H10.2L12 2Z" fill="white" fill-opacity=".95"/></svg>
-          </div>
-          <div><div class="font-display text-[22px] leading-none tracking-[-.02em]">Ntige</div><div class="text-[10px] font-medium uppercase tracking-[.14em] text-[#9C7C6B] -mt-[2px]">PASTRIES</div></div>
-        </a>
-        <div class="hidden items-center gap-[34px] md:flex">
-          <button onclick="scrollToSection('about')" class="text-[14px] font-medium text-[#5A4139] hover:text-[#3C2521]">Our Story</button>
-          <button onclick="scrollToSection('menu')" class="text-[14px] font-medium text-[#5A4139] hover:text-[#3C2521]">Menu</button>
-          <button onclick="scrollToSection('custom')" class="text-[14px] font-medium text-[#5A4139] hover:text-[#3C2521]">Custom</button>
-          <button onclick="scrollToSection('reviews')" class="text-[14px] font-medium text-[#5A4139] hover:text-[#3C2521]">Reviews</button>
-        </div>
-        <div class="flex items-center gap-3">
-          <a href="https://wa.me/2348037998324?text=Hello%20Ntige%20Pastries!%20I'd%20like%20to%20place%20an%20order..." target="_blank" class="hidden md:flex h-[42px] items-center gap-2.5 rounded-full bg-[#25D366] px-[22px] text-[14px] font-medium text-white shadow-[0_4px_20px_-4px_rgba(37,211,102,0.35)] hover:bg-[#20BA57]">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 3.9C17.9 1.8 15 .7 12 .7 5.8 .7 .7 5.8 .7 12c0 2.1.6 4.1 1.7 5.8L.7 23.3 6.3 21.6c1.7.9 3.6 1.4 5.7 1.4h0c6.2 0 11.3-5.1 11.3-11.3 0-3-1.2-5.8-3.3-7.8z" fill="currentColor"/></svg>
-            Order on WhatsApp
-          </a>
-          <button id="mobileMenuBtn" class="flex h-10 w-10 items-center justify-center rounded-[14px] border border-[#FADCD9] bg-white/60 md:hidden">
-            <div class="relative h-[14px] w-[18px]">
-              <span class="absolute left-0 top-0 h-[2px] w-full rounded-full bg-current transition-all" id="bar1"></span>
-              <span class="absolute left-0 top-[6px] h-[2px] w-full rounded-full bg-current transition-opacity" id="bar2"></span>
-              <span class="absolute left-0 top-[12px] h-[2px] w-full rounded-full bg-current transition-all" id="bar3"></span>
-            </div>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div id="mobileMenu" class="md:hidden overflow-hidden max-h-0 transition-all duration-300 bg-[#FFFBF7]/95 backdrop-blur-xl">
-      <div class="space-y-1 px-6 py-4 border-t border-[#FADCD9]/60">
-        <button onclick="scrollToSection('about')" class="block w-full rounded-2xl px-4 py-3 text-left text-[15px] font-medium hover:bg-[#F8EDEB]">Our Story</button>
-        <button onclick="scrollToSection('menu')" class="block w-full rounded-2xl px-4 py-3 text-left text-[15px] font-medium hover:bg-[#F8EDEB]">Menu</button>
-        <button onclick="scrollToSection('custom')" class="block w-full rounded-2xl px-4 py-3 text-left text-[15px] font-medium hover:bg-[#F8EDEB]">Custom Orders</button>
-        <button onclick="scrollToSection('reviews')" class="block w-full rounded-2xl px-4 py-3 text-left text-[15px] font-medium hover:bg-[#F8EDEB]">Reviews</button>
-        <a href="https://wa.me/2348037998324?text=Hello%20Ntige%20Pastries!" target="_blank" class="mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] py-[14px] text-[15px] font-medium text-white">Order on WhatsApp</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(250,220,217,.35),transparent_60%)] pointer-events-none"></div>
-    <div class="mx-auto max-w-[1200px] px-6 pb-[88px] pt-[64px] sm:px-8 sm:pt-[88px]">
-      <div class="grid items-center gap-[56px] lg:grid-cols-[1.08fr_.92fr] lg:gap-[72px]">
-        <div class="relative z-10">
-          <div class="rv up d1 mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#FADCD9]/70 bg-white/70 px-4 h-10 backdrop-blur-md">
-            <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#D4A017] opacity-75"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-[#D4A017]"></span></span>
-            <span class="text-[13px] font-medium text-[#5A4139]">Baked daily • Local • Handcrafted</span>
-          </div>
-          <h1 class="rv up d2 font-display text-[52px] leading-[1.04] tracking-[-.03em] text-[#2A1B17] sm:text-[64px] lg:text-[72px]">
-            Freshly Baked<br><span class="relative inline-block">Happiness<svg class="absolute -bottom-[10px] left-0 h-[14px] w-full" viewBox="0 0 200 14" fill="none"><path d="M2 10C32 2 72 2 124 6C168 9 196 10 198 10" stroke="#D4A017" stroke-width="3" stroke-linecap="round" opacity=".45"/></svg></span><br>Every Day
-          </h1>
-          <p class="rv up d3 mt-7 max-w-[520px] text-[18px] leading-[1.7] text-[#5A4139]">Homegrown in Lagos. We bake with intention—quality ingredients, practiced hands, and the kind of care that turns simple moments into sweet memories.</p>
-          <div class="rv up d4 mt-[38px] flex flex-col gap-4 sm:flex-row">
-            <a href="https://wa.me/2348037998324?text=Hello%20Ntige%20Pastries!" target="_blank" class="group inline-flex h-[56px] items-center justify-center gap-3 rounded-full bg-[#25D366] px-[28px] text-[16px] font-medium text-white shadow-[0_12px_32px_-12px_rgba(37,211,102,.45)] hover:bg-[#20BA57]">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 3.9C17.9 1.8 15 .7 12 .7 5.8 .7 .7 5.8 .7 12c0 2.1.6 4.1 1.7 5.8L.7 23.3 6.3 21.6c1.7.9 3.6 1.4 5.7 1.4h0c6.2 0 11.3-5.1 11.3-11.3 0-3-1.2-5.8-3.3-7.8z" fill="currentColor"/></svg>
-              Order on WhatsApp
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="transition-transform group-hover:translate-x-0.5"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
-            </a>
-            <button onclick="scrollToSection('menu')" class="inline-flex h-[56px] items-center justify-center gap-2.5 rounded-full border border-[#E8D5CF] bg-white/80 px-[26px] text-[16px] font-medium text-[#3C2521] backdrop-blur hover:bg-white">View Menu</button>
-          </div>
-          <div class="rv up d5 mt-[44px] flex items-center gap-[36px] border-t border-[#F0E3DE] pt-[28px]">
-            <div><div class="font-display text-[28px] leading-none">2,400+</div><div class="mt-1 text-[12px] font-medium uppercase tracking-[.08em] text-[#9C7C6B]">Happy Customers</div></div>
-            <div class="h-10 w-[1px] bg-[#E8D5CF]"></div>
-            <div><div class="font-display text-[28px] leading-none">100%</div><div class="mt-1 text-[12px] font-medium uppercase tracking-[.08em] text-[#9C7C6B]">Made Daily</div></div>
-            <div class="h-10 w-[1px] bg-[#E8D5CF]"></div>
-            <div><div class="font-display text-[28px] leading-none">4.9</div><div class="mt-1 flex items-center gap-1.5"><div class="flex">★★★★★</div><span class="text-[12px] text-[#9C7C6B]">rating</span></div></div>
-          </div>
-        </div>
-        <div class="rv rt d3 relative mx-auto aspect-[4/5] w-full max-w-[520px]">
-          <div class="relative h-full overflow-hidden rounded-[36px] border-[7px] border-white bg-[#FDF6F1] shadow-[0_40px_120px_-30px_rgba(60,37,33,.35)]">
-            <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?q=80&w=1600&auto=format&fit=crop" alt="Pastries" class="h-full w-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#3C2521]/25 via-transparent to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-[22px]">
-              <div class="rounded-[24px] border border-white/40 bg-[#FFFBF7]/85 p-[18px] backdrop-blur-xl">
-                <div class="flex items-start justify-between gap-4">
-                  <div><div class="font-display text-[20px]">Signature Collection</div><div class="mt-1.5 text-[13px] text-[#5A4139]">Layer cakes, cupcakes & savories baked each morning</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY WE BAKE -->
-  <section id="about" class="border-y border-[#F0E3DE]/70 bg-[#FFF8F4]">
-    <div class="mx-auto max-w-[1200px] px-6 py-[96px] sm:px-8">
-      <div class="mx-auto max-w-[880px] flex flex-col lg:flex-row gap-[20px]">
-        <div class="rv lt flex-1 rounded-[32px] bg-gradient-to-b from-[#FFF8F4] to-[#FDECEA] p-[44px] sm:p-[52px]">
-          <div class="text-[12px] font-semibold uppercase tracking-[.18em] text-[#B07D6B]">Why We Bake</div>
-          <h2 class="mt-[16px] font-display text-[36px] leading-[1.12] sm:text-[42px]">Comfort,<br>care, and<br>beautiful<br>flavor</h2>
-          <p class="mt-[22px] text-[16px] leading-[1.8] text-[#5A4139]">Ntige Pastries was created from a love for homemade goodness — the kind of treats that make ordinary days softer and celebrations more memorable.</p>
-        </div>
-        <div class="rv rt flex-1 rounded-[32px] overflow-hidden bg-[#FDF6F1] min-h-[380px] lg:min-h-[460px]">
-          <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?q=80&w=1000&auto=format&fit=crop" alt="Cake" class="h-full w-full object-cover">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MENU -->
-  <section id="menu" class="bg-[#FFFBF7]">
-    <div class="mx-auto max-w-[1200px] px-6 py-[96px] sm:px-8">
-      <div class="rv up">
-        <div class="inline-flex items-center gap-2 rounded-full border border-[#E8D5CF] bg-[#FFF8F4] px-[18px] h-9 text-[13px] font-medium"><span class="h-[6px] w-[6px] rounded-full bg-[#D4A017]"></span>Menu</div>
-        <h2 class="mt-[22px] font-display text-[42px] leading-[1.08]">Cakes, cupcakes &<br>savory favorites</h2>
-      </div>
-      <div class="mt-[36px] flex flex-wrap gap-[10px] border-b border-[#F0E3DE] pb-[18px]" id="categories">
-        <button data-cat="All" class="cat-btn active rounded-full px-[20px] h-[40px] text-[14px] font-medium bg-[#3C2521] text-white">All</button>
-        <button data-cat="Cakes" class="cat-btn rounded-full px-[20px] h-[40px] text-[14px] font-medium border border-[#E8D5CF] bg-white">Cakes</button>
-        <button data-cat="Cupcakes" class="cat-btn rounded-full px-[20px] h-[40px] text-[14px] font-medium border border-[#E8D5CF] bg-white">Cupcakes</button>
-        <button data-cat="Savories" class="cat-btn rounded-full px-[20px] h-[40px] text-[14px] font-medium border border-[#E8D5CF] bg-white">Savories</button>
-        <button data-cat="Small Chops" class="cat-btn rounded-full px-[20px] h-[40px] text-[14px] font-medium border border-[#E8D5CF] bg-white">Small Chops</button>
-      </div>
-      <div class="mt-[48px] grid gap-[28px] sm:grid-cols-2 lg:grid-cols-3" id="products"></div>
-    </div>
-  </section>
-
-  <!-- CUSTOM -->
-  <section id="custom" class="border-y border-[#F0E3DE]/70 bg-[#FFF8F4]">
-    <div class="mx-auto max-w-[1200px] px-6 py-[96px] sm:px-8">
-      <div class="rv lt grid items-center gap-[64px] lg:grid-cols-2">
+  <!-- CAKES SECTION -->
+  <section id="cakes" class="py-20 sm:py-28 bg-[#fcf6f1]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 reveal">
         <div>
-          <div class="inline-flex items-center gap-2 rounded-full border border-[#E8D5CF] bg-white px-[18px] h-9 text-[13px] font-medium">Custom & Events</div>
-          <h2 class="mt-[22px] font-display text-[40px] leading-[1.1] sm:text-[46px]">Your celebration,<br>impeccably sweet</h2>
-          <p class="mt-[20px] max-w-[500px] text-[17px] leading-[1.75] text-[#5A4139]">Birthdays, weddings, corporate gatherings—we design cakes and dessert experiences that feel personal and look stunning.</p>
-          <a href="https://wa.me/2348037998324" target="_blank" class="mt-[40px] inline-flex h-[52px] items-center gap-3 rounded-full bg-[#25D366] px-[26px] text-[15px] font-medium text-white">Start a custom order →</a>
+          <div class="product-label">Cakes for All Occasions 🎂</div>
+          <h2 class="display text-[40px] sm:text-[56px] leading-[1.05] tracking-[-0.02em] font-[800] mt-3 text-zinc-900">Celebration cakes<br>made stunning.</h2>
         </div>
-        <div class="relative">
-          <div class="overflow-hidden rounded-[32px] border-[8px] border-white shadow-xl">
-            <img src="https://funcakes.com/content/uploads/2021/08/Sugar-Lace-cake-960x960-c-default.jpg" alt="Wedding cake" class="aspect-[4/3] w-full object-cover">
+        <p class="text-zinc-600 max-w-[380px] text-[16.8px] leading-relaxed">
+          From intimate birthdays to grand weddings. Moist, rich, beautifully finished. Custom designs in 48hr.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-7">
+        <div class="reveal card-hover bg-white rounded-[28px] overflow-hidden soft-shadow border border-[#f1e6db]">
+          <img src="https://images.pexels.com/photos/33695614/pexels-photo-33695614.jpeg?auto=compress&cs=tinysrgb&w=900" class="w-full h-[380px] object-cover" alt="Birthday Cakes">
+          <div class="p-6">
+            <div class="text-[11.5px] font-[700] uppercase tracking-wider text-[#cc0a17]">01</div>
+            <h3 class="display text-[24px] font-[700] mt-1">Birthday Cakes</h3>
+            <p class="text-zinc-600 text-[14.7px] mt-2">Buttercream, fondant, drip cakes. 1-4 tiers. Your theme, our flair.</p>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-1 card-hover bg-white rounded-[28px] overflow-hidden soft-shadow border border-[#f1e6db] md:translate-y-7">
+          <img src="https://images.pexels.com/photos/17931469/pexels-photo-17931469.jpeg?auto=compress&cs=tinysrgb&w=900" class="w-full h-[380px] object-cover" alt="Wedding Cakes">
+          <div class="p-6">
+            <div class="text-[11.5px] font-[700] uppercase tracking-wider text-[#cc0a17]">02</div>
+            <h3 class="display text-[24px] font-[700] mt-1">Wedding Cakes</h3>
+            <p class="text-zinc-600 text-[14.7px] mt-2">Elegant tiered cakes. Tasting consults available. Port Harcourt delivery.</p>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-2 card-hover bg-white rounded-[28px] overflow-hidden soft-shadow border border-[#f1e6db]">
+          <img src="https://images.pexels.com/photos/31290766/pexels-photo-31290766.jpeg?auto=compress&cs=tinysrgb&w=900" class="w-full h-[380px] object-cover" alt="Celebration Cakes">
+          <div class="p-6">
+            <div class="text-[11.5px] font-[700] uppercase tracking-wider text-[#cc0a17]">03</div>
+            <h3 class="display text-[24px] font-[700] mt-1">Celebration Cakes</h3>
+            <p class="text-zinc-600 text-[14.7px] mt-2">Anniversaries, graduations, corporate. Branded & luxury finishes.</p>
           </div>
         </div>
       </div>
+
+      <div class="mt-10 text-center reveal">
+        <a href="https://wa.me/2348037998324?text=Hi%20Ntige%20Pastries!%20I%20need%20a%20cake%20for%20my%20event.%20Can%20we%20discuss%20designs%20and%20pricing?" target="_blank" class="inline-flex items-center gap-2 btn-primary rounded-full px-6 py-3.5 text-[15px] font-[660]">Book a Cake Consultation <i class="ri-arrow-right-line"></i></a>
+        <p class="text-[13.5px] text-zinc-500 mt-3">48hr lead time recommended • Nationwide waybill available</p>
+      </div>
     </div>
   </section>
 
-  <!-- REVIEWS -->
-  <section id="reviews" class="bg-[#FFFBF7]">
-    <div class="mx-auto max-w-[1200px] px-6 py-[96px] sm:px-8">
-      <div class="rv up mx-auto max-w-[760px] text-center">
-        <div class="inline-flex items-center gap-2 rounded-full border border-[#E8D5CF] bg-[#FFF8F4] px-[18px] h-9 text-[13px] font-medium">Loved by Lagos</div>
-        <h2 class="mt-[22px] font-display text-[42px]">What our customers say</h2>
+  <!-- WHY CHOOSE US -->
+  <section id="why" class="py-20 sm:py-28 bg-white border-t border-[#efe7e0]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="max-w-xl mx-auto text-center reveal">
+        <div class="product-label">Why Port Harcourt trusts Ntige</div>
+        <h2 class="display text-[40px] sm:text-[52px] font-[800] tracking-[-0.02em] mt-3">Why Choose Us</h2>
       </div>
-      <div class="relative mt-[56px] mx-auto max-w-[880px]" id="carousel" onmouseenter="pauseCarousel()" onmouseleave="resumeCarousel()">
-        <div class="overflow-hidden rounded-[32px] border border-[#F0E3DE] bg-white p-[36px] sm:p-[48px] shadow-xl">
-          <div id="testimonial" class="transition-all duration-500"></div>
-          <button onclick="prevTestimonial()" class="absolute left-4 top-1/2 -translate-y-1/2 grid h-[44px] w-[44px] place-items-center rounded-full border bg-white/95 shadow-lg">‹</button>
-          <button onclick="nextTestimonial()" class="absolute right-4 top-1/2 -translate-y-1/2 grid h-[44px] w-[44px] place-items-center rounded-full border bg-white/95 shadow-lg">›</button>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-14">
+        <div class="reveal rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7 card-hover">
+          <div class="w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px]"><i class="ri-verified-badge-fill"></i></div>
+          <h4 class="display text-[20px] font-[700] mt-5">100% Quality Guarantee</h4>
+          <p class="text-[14.7px] text-zinc-600 mt-2 leading-relaxed">If it's not perfect, we remake it. Every single order is taste-checked before dispatch.</p>
         </div>
-        <div class="mt-[28px] flex justify-center gap-[10px]" id="dots"></div>
+        <div class="reveal reveal-delay-1 rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7 card-hover">
+          <div class="w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px]"><i class="ri-leaf-line"></i></div>
+          <h4 class="display text-[20px] font-[700] mt-5">Fresh Ingredients</h4>
+          <p class="text-[14.7px] text-zinc-600 mt-2 leading-relaxed">We bake in small batches daily. No preservatives. Real butter, real flavour.</p>
+        </div>
+        <div class="reveal reveal-delay-2 rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7 card-hover">
+          <div class="w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px]"><i class="ri-flashlight-line"></i></div>
+          <h4 class="display text-[20px] font-[700] mt-5">Fast Delivery</h4>
+          <p class="text-[14.7px] text-zinc-600 mt-2 leading-relaxed">Same-day in Port Harcourt. Hot, fresh, well-packed. Event timing? We never miss.</p>
+        </div>
+        <div class="reveal reveal-delay-3 rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7 card-hover">
+          <div class="w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px]"><i class="ri-medal-line"></i></div>
+          <h4 class="display text-[20px] font-[700] mt-5">Professional Pastry Chef</h4>
+          <p class="text-[14.7px] text-zinc-600 mt-2 leading-relaxed">Trained hands, Nigerian heart. Beautiful, consistent results every time.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="border-t border-[#F0E3DE]/70 bg-[#FFF8F4]">
-    <div class="mx-auto max-w-[1200px] px-6 py-[96px] sm:px-8">
-      <div class="rv sc mx-auto max-w-[980px] overflow-hidden rounded-[36px] border bg-white shadow-xl grid lg:grid-cols-[1.1fr_.9fr]">
-        <div class="p-[40px] sm:p-[56px]">
-          <div class="inline-flex items-center gap-2 rounded-full border bg-[#FFF8F4] px-[16px] h-8 text-[12px] font-medium">Ordering</div>
-          <h2 class="mt-[20px] font-display text-[36px] leading-[1.1] sm:text-[42px]">Order in 30 seconds<br>on WhatsApp</h2>
-          <p class="mt-[18px] text-[16px] leading-[1.7] text-[#5A4139]">Tell us what you need, when, and where. We'll confirm price and bake for your time.</p>
-          <div class="mt-[32px] space-y-[18px] text-[14px]">
-            <div><div class="text-[12px] uppercase tracking-[.08em] text-[#9C7C6B]">WhatsApp</div><a href="https://wa.me/2348037998324" target="_blank" class="font-medium underline">+234 803 799 8324</a></div>
-            <div><div class="text-[12px] uppercase tracking-[.08em] text-[#9C7C6B]">Pickup</div><div class="font-medium">Lekki Phase 1, Lagos</div></div>
+  <!-- CTA Section -->
+  <section class="py-20 sm:py-28">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10">
+      <div class="red-gradient rounded-[30px] sm:rounded-[40px] px-7 sm:px-16 py-16 sm:py-20 text-center text-white relative overflow-hidden">
+        <div class="absolute -right-16 -top-16 w-56 h-56 bg-white/7 rounded-full blur-[30px]"></div>
+        <div class="absolute -left-16 -bottom-16 w-56 h-56 bg-black/10 rounded-full blur-[30px]"></div>
+        <div class="relative reveal">
+          <div class="text-[12px] font-[700] uppercase tracking-widest text-red-100">Ready when you are</div>
+          <h2 class="display text-[38px] sm:text-[58px] font-[800] tracking-[-0.022em] mt-3 leading-[1.06]">Ready to enjoy<br>something delicious?</h2>
+          <p class="text-red-100 mt-4 text-[17px] max-w-xl mx-auto">Meatpies hot out the oven, cakes for this weekend, chops for your party. Let's make it happen today.</p>
+          <div class="flex flex-wrap justify-center gap-3 mt-8">
+            <a href="https://wa.me/2348037998324?text=Hi%20Ntige%20Pastries!%20Ready%20to%20order%20something%20delicious%20%F0%9F%98%8B" target="_blank" class="bg-white text-[#c60512] rounded-full px-7 py-4 font-[750] text-[16px] inline-flex items-center gap-2 hover:bg-zinc-100 transition">
+              <i class="ri-whatsapp-fill text-[20px] text-green-600"></i>
+              Order on WhatsApp
+            </a>
+            <a href="https://www.instagram.com/ntigepastries?igsh=NzBpdXpjZDVvcHBp" target="_blank" class="bg-white/10 border border-white/30 text-white rounded-full px-6 py-4 font-[620] text-[15.5px] hover:bg-white/15 transition inline-flex items-center gap-2">
+              <i class="ri-instagram-line"></i> See our work
+            </a>
           </div>
-          <a href="https://wa.me/2348037998324" target="_blank" class="mt-[36px] inline-flex h-[58px] items-center gap-3 rounded-full bg-[#25D366] px-[32px] text-[17px] font-medium text-white">Message on WhatsApp</a>
+          <p class="text-[13.5px] text-red-100/90 mt-4">Fast replies • 9AM – 9PM daily • Port Harcourt</p>
         </div>
-        <div class="relative bg-[#FDF6F1] min-h-[300px]"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=1200&auto=format&fit=crop" class="absolute inset-0 h-full w-full object-cover"></div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="border-t border-[#F0E3DE] bg-[#FFFBF7]">
-    <div class="mx-auto max-w-[1200px] px-6 py-[52px] sm:px-8">
-      <div class="flex flex-col items-center justify-between gap-[28px] sm:flex-row">
-        <div class="flex items-center gap-3">
-          <div class="flex h-9 w-9 items-center justify-center rounded-[12px] bg-[#3C2521] text-white">★</div>
-          <div><div class="font-display text-[18px]">Ntige Pastries</div><div class="text-[11px] uppercase tracking-[.1em] text-[#9C7C6B]">Freshly Baked Happiness</div></div>
+  <!-- Contact / Footer -->
+  <footer id="contact" class="bg-[#111113] text-zinc-300">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 py-16 sm:py-20">
+      <div class="grid lg:grid-cols-12 gap-12">
+        <div class="lg:col-span-5">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-white text-zinc-900 flex items-center justify-center display font-[800] text-[20px]">N</div>
+            <div>
+              <div class="text-white display font-[800] text-[22px] leading-tight">Ntige Pastries</div>
+              <div class="text-[11px] uppercase tracking-widest text-zinc-500 font-[650]">Port Harcourt, Nigeria</div>
+            </div>
+          </div>
+          <p class="text-zinc-400 mt-5 max-w-[380px] leading-relaxed text-[15px]">
+            Freshly made pastries for every occasion. Cakes, meatpies, small chops, parfait, zobo & more. 100% quality guarantee.
+          </p>
+          <div class="flex gap-3 mt-6">
+            <a href="https://wa.me/2348037998324" target="_blank" class="w-11 h-11 rounded-full bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center transition text-white text-[19px]" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+            <a href="https://www.instagram.com/ntigepastries?igsh=NzBpdXpjZDVvcHBp" target="_blank" class="w-11 h-11 rounded-full bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center transition text-white text-[19px]" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="https://www.tiktok.com/@ntige.pastries?_r=1&_t=ZS-974JqJ3RTsG" target="_blank" class="w-11 h-11 rounded-full bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center transition text-white text-[19px]" aria-label="TikTok"><i class="ri-tiktok-fill"></i></a>
+          </div>
         </div>
-        <div class="flex flex-wrap items-center gap-x-[28px] gap-y-[14px] text-[14px]">
-          <a href="https://www.instagram.com/ntige.pastries/" target="_blank" class="hover:text-[#E1306C]">Instagram</a>
-          <a href="https://www.tiktok.com/@ntige.pastries" target="_blank" class="hover:text-[#2A1B17]">TikTok</a>
-          <a href="tel:+2348037998324" class="hover:text-[#2A1B17]">Call Us</a>
+
+        <div class="lg:col-span-3 lg:col-start-8">
+          <div class="text-[11.5px] uppercase tracking-widest text-zinc-500 font-[700] mb-3">Order Direct</div>
+          <a href="https://wa.me/2348037998324" target="_blank" class="text-white text-[18px] font-[650] hover:text-red-400 transition">+234 803 799 8324</a>
+          <div class="mt-1 text-zinc-400 text-[14px]">WhatsApp • Call • DM</div>
+          <div class="mt-6 text-[13.5px] text-zinc-400">Open daily<br>9:00 AM – 9:00 PM WAT</div>
+        </div>
+
+        <div class="lg:col-span-2">
+          <div class="text-[11.5px] uppercase tracking-widest text-zinc-500 font-[700] mb-3">Quick Links</div>
+          <ul class="space-y-2.5 text-[15px] text-zinc-300">
+            <li><a href="#menu" class="hover:text-white">Menu</a></li>
+            <li><a href="#cakes" class="hover:text-white">Cakes</a></li>
+            <li><a href="#why" class="hover:text-white">Why Us</a></li>
+            <li><a href="https://wa.me/2348037998324" target="_blank" class="hover:text-white">Order</a></li>
+          </ul>
         </div>
       </div>
-      <div class="mt-[36px] flex flex-col items-center justify-between gap-3 border-t border-[#F0E3DE] pt-[28px] text-[13px] text-[#9C7C6B] sm:flex-row">
-        <p>© <span id="year"></span> Ntige Pastries. Made with love in Lagos.</p>
+
+      <div class="border-t border-zinc-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13.5px] text-zinc-500">
+        <div>© <span id="year"></span> Ntige Pastries. All rights reserved. Made fresh in Port Harcourt.</div>
+        <div class="flex gap-5">
+          <a href="https://www.instagram.com/ntigepastries?igsh=NzBpdXpjZDVvcHBp" target="_blank" class="hover:text-zinc-300">Instagram</a>
+          <a href="https://www.tiktok.com/@ntige.pastries?_r=1&_t=ZS-974JqJ3RTsG" target="_blank" class="hover:text-zinc-300">TikTok</a>
+          <a href="https://wa.me/2348037998324" target="_blank" class="hover:text-zinc-300">WhatsApp</a>
+        </div>
       </div>
     </div>
   </footer>
+</main>
 
-  <!-- FLOATING WHATSAPP -->
-  <a href="https://wa.me/2348037998324" target="_blank" class="fixed bottom-[20px] right-[20px] z-[90] grid h-[56px] w-[56px] place-items-center rounded-full bg-[#25D366] text-white shadow-[0_6px_24px_-6px_rgba(37,211,102,.5)] hover:scale-110 sm:bottom-[28px] sm:right-[28px] sm:h-[62px] sm:w-[62px]" style="animation:waFloat 3s ease-in-out infinite">
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M20 3.9C17.9 1.8 15 .7 12 .7 5.8 .7 .7 5.8 .7 12c0 2.1.6 4.1 1.7 5.8L.7 23.3 6.3 21.6c1.7.9 3.6 1.4 5.7 1.4h0c6.2 0 11.3-5.1 11.3-11.3 0-3-1.2-5.8-3.3-7.8z" fill="currentColor"/></svg>
-  </a>
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/2348037998324?text=Hi%20Ntige%20Pastries!%20I'd%20like%20to%20order." target="_blank" id="wa-float" class="fixed bottom-5 right-4 sm:right-6 z-50 wa-float bg-[#22c55e] hover:bg-[#16a34a] text-white rounded-full w-14 h-14 sm:w-[60px] sm:h-[60px] flex items-center justify-center transition-all duration-200 hover:scale-105" aria-label="Chat on WhatsApp">
+  <i class="ri-whatsapp-fill text-[28px]"></i>
+</a>
 
-  <!-- PRODUCT MODAL -->
-  <div id="modal" class="fixed inset-0 z-[100] hidden place-items-center bg-[#3C2521]/60 p-4 backdrop-blur-[2px]" onclick="closeModal()">
-    <div class="w-full max-w-[560px] overflow-hidden rounded-[32px] border bg-white shadow-2xl" onclick="event.stopPropagation()">
-      <div class="relative aspect-[16/10]"><img id="modalImg" class="h-full w-full object-cover"><button onclick="closeModal()" class="absolute right-4 top-4 grid h-[38px] w-[38px] place-items-center rounded-full bg-white/90">✕</button></div>
-      <div class="p-[28px]"><h3 id="modalTitle" class="font-display text-[26px]"></h3><p id="modalDesc" class="mt-4 text-[15px] text-[#5A4139]"></p><div class="mt-6 flex gap-3"><a id="modalLink" target="_blank" class="flex h-[50px] items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 font-medium text-white">Order via WhatsApp</a><button onclick="closeModal()" class="flex h-[50px] items-center justify-center rounded-full border bg-[#FFF8F4] px-6 font-medium">Close</button></div></div>
-    </div>
+<!-- Mobile sticky action bar -->
+<div id="mobile-action-bar">
+  <div class="flex items-center gap-2 w-full max-w-xl mx-auto">
+    <a href="#menu" class="flex-1 text-center border border-zinc-300 bg-white text-zinc-900 rounded-full py-3 text-[14.5px] font-[660]">View Menu</a>
+    <a href="https://wa.me/2348037998324?text=Hi%20Ntige%20Pastries!%20I'd%20like%20to%20order." target="_blank" class="flex-[1.45] text-center btn-primary rounded-full py-3 text-[14.5px] font-[700] inline-flex items-center justify-center gap-1.5">
+      <i class="ri-whatsapp-line text-[17px]"></i> Order Now
+    </a>
   </div>
+</div>
 
-  <script>
-    // DATA
-    const products = [
-      {id:1,name:"Red Velvet Celebration Cake",desc:"Moist crimson layers with cream cheese frosting & fresh berries",price:"From ₦18,000",img:"https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?q=80&w=1000",cat:"Cakes",pop:true},
-      {id:2,name:"MeatPie",desc:"A savory, handheld pastry filled with seasoned meat and vegetables encased in a golden, buttery, and flaky crust.",price:"From ₦1,000",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrE_1fRRT50qx-kGGqFAjc1AeXdJBvg5ZlPg&s",cat:"Small Chops"},
-      {id:3,name:"Belgian Chocolate Fudge",desc:"Dark chocolate ganache, cocoa nibs, sea salt flakes",price:"From ₦16,500",img:"https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?q=80&w=1000",cat:"Cakes"},
-      {id:4,name:"Rosette Cupcakes (Box of 6)",desc:"Vanilla, red velvet & chocolate swirls with filled centers",price:"₦7,500",img:"https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=1000",cat:"Cupcakes",pop:true},
-      {id:5,name:"Chin Chin",desc:"It consist of bite-sized, deep-fried dough that is typically crispy on the outside, slightly sweet, and heavily flavored with aromatic spices like nutmeg or vanilla",price:"₦500",img:"https://cookingwithclaudy.com/wp-content/uploads/2023/11/20231109103244_IMG_6461-1-500x375.jpg",cat:"Savories"},
-      {id:6,name:"Lemon Blueberry Minis",desc:"Zesty lemon, fresh blueberries, whipped mascarpone",price:"₦7,000",img:"https://images.unsplash.com/photo-1605807646983-377bc5a76493?q=80&w=1000",cat:"Cupcakes"},
-      {id:7,name:"Eggroll",desc:"It is a sweet, deep-fried pastry wrapped around a whole boiled egg",price:"₦500",img:"https://i.ytimg.com/vi/y0lp6CsC700/maxresdefault.jpg",cat:"Small Chops",pop:true},
-      {id:8,name:"Chicken Samosas (15 pcs)",desc:"Crisp pastry, curried chicken, fresh herbs, chutney dip",price:"₦6,800",img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=1000",cat:"Savories"},
-      {id:9,name:"Fish Rolls (10 pcs)",desc:"Flaky pastry, lightly spiced fish, scotch bonnet hint",price:"₦7,200",img:"https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=80&w=1000",cat:"Savories"},
-      {id:10,name:"Small Chops Deluxe Platter",desc:"Meat pies, samosas, spring rolls, chicken wings & dips",price:"₦14,500",img:"https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=1000",cat:"Small Chops",pop:true},
-      {id:11,name:"Mini Cocktail Platter",desc:"Assorted bite-size pastries, perfect for every gathering",price:"₦11,000",img:"https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=1000",cat:"Small Chops"},
-      {id:12,name:"Sharwama",desc:"Crispy, golden fried dough filled with seasoned meat and vegetables",price:"₦3,500",img:"https://www.bylena.com/images/uploaded/1920x_Shaorma-de-casa-336.jpg",cat:"Small Chops"},
-    ];
-    
-    const testimonials = [
-      {name:"Amina Bello",role:"Birthday Celebration",text:"The red velvet cake was absolutely divine! My guests couldn't stop asking for the recipe. Ntige captured the celebration perfectly.",avatar:"AB"},
-      {name:"Chidi Okoro",role:"Corporate Event",text:"Ordered 80 meat pies for our staff retreat. Hot, delicious, and everyone loved them. Professional, reliable, and tasty.",avatar:"CO"},
-      {name:"Funmi Adeyemi",role:"Weekly Customer",text:"I get cupcakes every Friday for my team. The quality never drops, always made that morning. That caramel pecan is addictive!",avatar:"FA"},
-      {name:"Tunde Bakare",role:"Wedding Shower",text:"Ntige did our dessert table. Beautiful, tasty, and they accommodated every single request. Would definitely recommend!",avatar:"TB"},
-      {name:"Kemi Lawson",role:"Baby Shower",text:"The custom cake was stunning and tasted even better. Perfect balance of sweetness, perfect crumb. 10 out of 10!",avatar:"KL"},
-      {name:"Emeka Ugo",role:"Office Treats",text:"My go-to for client meetings. The small chops platter looks impressive and tastes even better. Great service always.",avatar:"EU"},
-    ];
-
-    // LOADER
+<script>
+  // Preloader - 3.5 seconds
+  window.addEventListener('load', () => {
     setTimeout(() => {
-      document.getElementById('loader').style.opacity = '0';
-      document.getElementById('loader').style.pointerEvents = 'none';
-    }, 3000);
+      document.getElementById('preloader').classList.add('hide');
+    }, 3500);
+  });
 
-    // MOBILE MENU
-    const menuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    let menuOpen = false;
-    menuBtn.onclick = () => {
-      menuOpen = !menuOpen;
-      mobileMenu.style.maxHeight = menuOpen ? '400px' : '0';
-      document.getElementById('bar1').style.transform = menuOpen ? 'translateY(6px) rotate(45deg)' : '';
-      document.getElementById('bar2').style.opacity = menuOpen ? '0' : '1';
-      document.getElementById('bar3').style.transform = menuOpen ? 'translateY(-6px) rotate(-45deg)' : '';
-    };
-
-    // SCROLL
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({behavior:'smooth'});
-      menuOpen = false;
-      mobileMenu.style.maxHeight = '0';
-    }
-
-    // PRODUCTS
-    function renderProducts(cat = 'All') {
-      const grid = document.getElementById('products');
-      const filtered = cat === 'All' ? products : products.filter(p => p.cat === cat);
-      grid.innerHTML = filtered.map((p,i) => `
-        <article class="rv up group relative overflow-hidden rounded-[28px] border border-[#F0E3DE] bg-white shadow-[0_18px_60px_-28px_rgba(60,37,33,.18)] hover:shadow-[0_28px_80px_-24px_rgba(60,37,33,.28)]" style="transition-delay:${i*0.08}s">
-          ${p.pop ? '<div class="absolute left-[14px] top-[14px] z-20 rounded-full bg-[#3C2521] px-[12px] h-[28px] flex items-center gap-1.5 text-[11px] font-semibold uppercase text-white"><span class="h-[5px] w-[5px] rounded-full bg-[#D4A017] animate-pulse"></span>Popular</div>' : ''}
-          <div class="relative aspect-[4/3] overflow-hidden">
-            <img src="${p.img}" alt="${p.name}" class="h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-[1.06]">
-            <button onclick="openModal(${p.id})" class="absolute bottom-4 right-4 grid h-[44px] w-[44px] place-items-center rounded-full bg-[#FFFBF7]/95 opacity-0 group-hover:opacity-100 transition-all">+</button>
-          </div>
-          <div class="p-[22px]">
-            <div class="flex items-start justify-between gap-3">
-              <h3 class="font-display text-[19px] leading-[1.25]">${p.name}</h3>
-              <div class="shrink-0 rounded-full bg-[#FFF8F4] px-[11px] py-[6px] text-[11px] font-medium whitespace-nowrap">${p.cat}</div>
-            </div>
-            <p class="mt-[10px] text-[14px] leading-[1.6] text-[#6B4F47] line-clamp-2">${p.desc}</p>
-            <div class="mt-[18px] flex items-center justify-between">
-              <span class="font-display text-[20px]">${p.price}</span>
-              <a href="https://wa.me/2348037998324" target="_blank" class="inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-[14px] h-[36px] text-[13px] font-medium text-white hover:bg-[#20BA57]">Order →</a>
-            </div>
-          </div>
-        </article>
-      `).join('');
-      setTimeout(() => document.querySelectorAll('#products .rv').forEach(el => el.classList.add('show')), 100);
-    }
-    renderProducts();
-
-    document.querySelectorAll('.cat-btn').forEach(btn => {
-      btn.onclick = () => {
-        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active', 'bg-[#3C2521]', 'text-white'));
-        btn.classList.add('active', 'bg-[#3C2521]', 'text-white');
-        renderProducts(btn.dataset.cat);
-      };
+  // Mobile menu toggle
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  mobileBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    const icon = mobileBtn.querySelector('i');
+    icon.className = mobileMenu.classList.contains('hidden') ? 'ri-menu-line text-xl' : 'ri-close-line text-xl';
+  });
+  document.querySelectorAll('.mobile-nav-link').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      mobileBtn.querySelector('i').className = 'ri-menu-line text-xl';
     });
+  });
 
-    // MODAL
-    function openModal(id) {
-      const p = products.find(x => x.id === id);
-      document.getElementById('modalImg').src = p.img;
-      document.getElementById('modalTitle').textContent = p.name;
-      document.getElementById('modalDesc').textContent = p.desc;
-      document.getElementById('modalLink').href = `https://wa.me/2348037998324?text=Hi, I'd like to order ${encodeURIComponent(p.name)}`;
-      document.getElementById('modal').classList.remove('hidden');
-      document.getElementById('modal').classList.add('grid');
-    }
-    function closeModal() {
-      document.getElementById('modal').classList.add('hidden');
-      document.getElementById('modal').classList.remove('grid');
-    }
-
-    // TESTIMONIALS
-    let currentTestimonial = 0;
-    let paused = false;
-    function renderTestimonial() {
-      const t = testimonials[currentTestimonial];
-      document.getElementById('testimonial').innerHTML = `
-        <div class="absolute right-[28px] top-[28px] text-[88px] leading-none text-[#FADCD9] font-display opacity-[.35]">"</div>
-        <div class="relative z-10">
-          <div class="flex items-start gap-[20px]">
-            <div class="grid h-[56px] w-[56px] place-items-center rounded-full bg-gradient-to-br from-[#FFF4F1] to-[#F8EDEB] text-[18px] font-semibold ring-4 ring-[#FFFBF7]">${t.avatar}</div>
-            <div class="flex-1">
-              <div class="flex items-center gap-[12px]"><h4 class="font-display text-[22px]">${t.name}</h4><span class="hidden sm:block h-[4px] w-[4px] rounded-full bg-[#E8D5CF]"></span><div class="text-[13px] text-[#9C7C6B]">${t.role}</div></div>
-              <div class="mt-[8px] flex gap-[3px]">★★★★★</div>
-            </div>
-          </div>
-          <blockquote class="mt-[28px] text-[19px] leading-[1.7] sm:text-[21px]">"${t.text}"</blockquote>
-        </div>
-      `;
-      document.getElementById('dots').innerHTML = testimonials.map((_,i) => 
-        `<button onclick="goToTestimonial(${i})" class="h-[9px] rounded-full transition-all ${i===currentTestimonial?'w-[28px] bg-[#3C2521]':'w-[9px] bg-[#E8D5CF]'}"></button>`
-      ).join('');
-    }
-    function nextTestimonial() { currentTestimonial = (currentTestimonial + 1) % testimonials.length; renderTestimonial(); }
-    function prevTestimonial() { currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length; renderTestimonial(); }
-    function goToTestimonial(i) { currentTestimonial = i; renderTestimonial(); paused = true; setTimeout(() => paused = false, 3000); }
-    function pauseCarousel() { paused = true; }
-    function resumeCarousel() { paused = false; }
-    renderTestimonial();
-    setInterval(() => { if (!paused) nextTestimonial(); }, 2000);
-
-    // Touch swipe
-    let touchStartX = 0;
-    const carousel = document.getElementById('carousel');
-    carousel.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
-    carousel.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 50) dx < 0 ? nextTestimonial() : prevTestimonial();
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
     });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    // SCROLL REVEAL
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
+  // Header shadow on scroll
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shadow-sm', window.scrollY > 10);
+  }, { passive: true });
+
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Smooth anchor (fallback)
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href');
+      if(id && id.length > 1){
+        const el = document.querySelector(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      }
+    });
+  });
+
+  /* ─── FILTER LOGIC ─── */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const productItems = document.querySelectorAll('.product-item');
+  const noResults = document.getElementById('no-results');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('active-filter'));
+      btn.classList.add('active-filter');
+
+      let visibleCount = 0;
+
+      productItems.forEach((item, i) => {
+        const cat = item.dataset.category;
+        const match = filter === 'all' || cat === filter;
+
+        if (!match) {
+          // Hide
+          item.classList.add('hiding');
+          setTimeout(() => {
+            item.classList.add('hidden-item');
+            item.classList.remove('hiding');
+          }, 320);
+        } else {
+          visibleCount++;
+          // Show (with staggered delay)
+          item.classList.remove('hidden-item', 'hiding');
+          item.classList.add('showing');
+          item.style.animationDelay = (visibleCount * 55) + 'ms';
+          setTimeout(() => item.classList.remove('showing'), 700);
         }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    
-    document.querySelectorAll('.rv').forEach(el => observer.observe(el));
 
-    const buttons = document.querySelectorAll(".cat-btn");
-
-buttons.forEach(btn => {
-  btn.addEventListener("click", () => {
-
-    // Remove active styles from all
-    buttons.forEach(b => {
-      b.classList.remove("bg-[#3C2521]", "text-white");
-      b.classList.add("bg-white", "text-[#3C2521]");
+      noResults.classList.toggle('hidden', visibleCount > 0);
     });
-
-    // Add active style to clicked one
-    btn.classList.add("bg-[#3C2521]", "text-white");
-    btn.classList.remove("bg-white", "text-[#3C2521]");
   });
-});
 
-    // YEAR
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  /* ─── QUICK VIEW MODAL ─── */
+  const modal = document.getElementById('product-modal');
+  const modalBackdrop = document.getElementById('modal-backdrop');
+  const modalClose = document.getElementById('modal-close');
+  const modalClose2 = document.getElementById('modal-close-2');
+  const modalImg = document.getElementById('modal-img');
+  const modalName = document.getElementById('modal-name');
+  const modalDesc = document.getElementById('modal-desc');
+  const modalWaBtn = document.getElementById('modal-wa-btn');
+
+  function openModal(card) {
+    const name = card.dataset.name;
+    const desc = card.dataset.desc;
+    const img  = card.dataset.img;
+    const wa   = card.dataset.wa;
+
+    modalImg.src = img;
+    modalImg.alt = name;
+    modalName.textContent = name;
+    modalDesc.textContent = desc;
+    modalWaBtn.href = `https://wa.me/2348037998324?text=Hi%20Ntige%20Pastries!%20${wa}`;
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Attach to + buttons
+  document.querySelectorAll('.quick-view-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.product-item');
+      openModal(card);
+    });
+  });
+
+  // Attach to Order → buttons in cards
+  document.querySelectorAll('.order-quick-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.product-item');
+      openModal(card);
+    });
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  modalClose2.addEventListener('click', closeModal);
+  modalBackdrop.addEventListener('click', closeModal);
+
+  // Escape key
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape') closeModal();
+  });
+
+
+</script>
 </body>
 </html>
