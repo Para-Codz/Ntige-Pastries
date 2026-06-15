@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ntige Pastries — Freshly Made Pastries for Every Occasion | Port Harcourt, Nigeria</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="description" content="Ntige Pastries - Pastry Chef in Nigeria. Cakes, Meatpie, Egg roll, Chin chin, Small chops, Parfait, Zobo & more. 100% quality guarantee. Order on WhatsApp.">
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -117,6 +116,108 @@
   /* floating wa */
   .wa-float {
     box-shadow: 0 10px 30px rgba(22,163,74,.32), 0 2px 8px rgba(0,0,0,.13);
+  }
+
+  /* Why Choose Us cards — red border on hover */
+  .why-card {
+    transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .25s ease;
+    cursor: default;
+  }
+  .why-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 24px 60px rgba(227,6,19,0.10), 0 4px 16px rgba(227,6,19,0.07);
+    border-color: #E30613 !important;
+  }
+  .why-card:hover .why-icon {
+    background: #E30613;
+    border-color: #E30613;
+    color: #fff !important;
+    box-shadow: 0 6px 20px rgba(227,6,19,0.30);
+  }
+
+  /* Footer social buttons */
+  .footer-social-btn {
+    position: relative;
+    width: 44px; height: 44px;
+    border-radius: 999px;
+    background: #1e1e20;
+    border: 1.5px solid #2e2e31;
+    display: flex; align-items: center; justify-content: center;
+    color: #a1a1aa;
+    transition: all .25s cubic-bezier(.22,1,.36,1);
+    text-decoration: none;
+  }
+  .footer-social-btn:hover {
+    background: #E30613;
+    border-color: #E30613;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(227,6,19,0.35);
+  }
+  .footer-social-tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%; transform: translateX(-50%);
+    background: #1a1a1c;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    padding: 4px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    border: 1px solid #2e2e31;
+  }
+  .footer-social-btn:hover .footer-social-tooltip {
+    opacity: 1;
+  }
+
+  /* Footer quick links */
+  .footer-quick-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #71717a;
+    font-weight: 550;
+    text-decoration: none;
+    transition: color .2s ease, gap .2s ease;
+    font-size: 14.5px;
+  }
+  .footer-quick-link i {
+    color: #E30613;
+    font-size: 16px;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  .footer-quick-link:hover {
+    color: #E30613;
+    gap: 8px;
+  }
+  .footer-quick-link:hover i {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Footer bottom bar social links */
+  .footer-bottom-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #52525b;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .2s ease;
+  }
+  .footer-bottom-link:hover {
+    color: #E30613;
+  }
+  .footer-bottom-link i {
+    transition: color .2s ease;
   }
 
   /* Filter buttons */
@@ -687,23 +788,23 @@
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-14">
-        <div class="reveal rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7 card-hover">
-          <div class="w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px]"><i class="ri-verified-badge-fill"></i></div>
+        <div class="reveal why-card rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7">
+          <div class="why-icon w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px] transition-all duration-300"><i class="ri-verified-badge-fill"></i></div>
           <h4 class="display text-[20px] font-[700] mt-5">100% Quality Guarantee</h4>
           <p class="text-[14.7px] text-zinc-600 mt-2 leading-relaxed">If it's not perfect, we remake it. Every single order is taste-checked before dispatch.</p>
         </div>
-        <div class="reveal reveal-delay-1 rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7 card-hover">
-          <div class="w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px]"><i class="ri-leaf-line"></i></div>
+        <div class="reveal reveal-delay-1 why-card rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7">
+          <div class="why-icon w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px] transition-all duration-300"><i class="ri-leaf-line"></i></div>
           <h4 class="display text-[20px] font-[700] mt-5">Fresh Ingredients</h4>
           <p class="text-[14.7px] text-zinc-600 mt-2 leading-relaxed">We bake in small batches daily. No preservatives. Real butter, real flavour.</p>
         </div>
-        <div class="reveal reveal-delay-2 rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7 card-hover">
-          <div class="w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px]"><i class="ri-flashlight-line"></i></div>
+        <div class="reveal reveal-delay-2 why-card rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7">
+          <div class="why-icon w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px] transition-all duration-300"><i class="ri-flashlight-line"></i></div>
           <h4 class="display text-[20px] font-[700] mt-5">Fast Delivery</h4>
           <p class="text-[14.7px] text-zinc-600 mt-2 leading-relaxed">Same-day in Port Harcourt. Hot, fresh, well-packed. Event timing? We never miss.</p>
         </div>
-        <div class="reveal reveal-delay-3 rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7 card-hover">
-          <div class="w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px]"><i class="ri-medal-line"></i></div>
+        <div class="reveal reveal-delay-3 why-card rounded-[24px] bg-[#fcf6f1] border border-[#f0e1d5] p-7">
+          <div class="why-icon w-12 h-12 rounded-full bg-white border border-[#ecdcd0] flex items-center justify-center text-[#d90b18] text-[22px] transition-all duration-300"><i class="ri-medal-line"></i></div>
           <h4 class="display text-[20px] font-[700] mt-5">Professional Pastry Chef</h4>
           <p class="text-[14.7px] text-zinc-600 mt-2 leading-relaxed">Trained hands, Nigerian heart. Beautiful, consistent results every time.</p>
         </div>
@@ -752,36 +853,77 @@
             Freshly made pastries for every occasion. Cakes, meatpies, small chops, parfait, zobo & more. 100% quality guarantee.
           </p>
           <div class="flex gap-3 mt-6">
-            <a href="https://wa.me/2348037998324" target="_blank" class="w-11 h-11 rounded-full bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center transition text-white text-[19px]" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
-            <a href="https://www.instagram.com/ntigepastries?igsh=NzBpdXpjZDVvcHBp" target="_blank" class="w-11 h-11 rounded-full bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center transition text-white text-[19px]" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
-            <a href="https://www.tiktok.com/@ntige.pastries?_r=1&_t=ZS-974JqJ3RTsG" target="_blank" class="w-11 h-11 rounded-full bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center transition text-white text-[19px]" aria-label="TikTok"><i class="ri-tiktok-fill"></i></a>
+            <a href="https://wa.me/2348037998324" target="_blank" class="footer-social-btn group" aria-label="WhatsApp">
+              <i class="ri-whatsapp-line text-[19px]"></i>
+              <span class="footer-social-tooltip">WhatsApp</span>
+            </a>
+            <a href="https://www.instagram.com/ntigepastries?igsh=NzBpdXpjZDVvcHBp" target="_blank" class="footer-social-btn group" aria-label="Instagram">
+              <i class="ri-instagram-line text-[19px]"></i>
+              <span class="footer-social-tooltip">Instagram</span>
+            </a>
+            <a href="https://www.tiktok.com/@ntige.pastries?_r=1&_t=ZS-974JqJ3RTsG" target="_blank" class="footer-social-btn group" aria-label="TikTok">
+              <i class="ri-tiktok-fill text-[19px]"></i>
+              <span class="footer-social-tooltip">TikTok</span>
+            </a>
           </div>
         </div>
 
         <div class="lg:col-span-3 lg:col-start-8">
           <div class="text-[11.5px] uppercase tracking-widest text-zinc-500 font-[700] mb-3">Order Direct</div>
-          <a href="https://wa.me/2348037998324" target="_blank" class="text-white text-[18px] font-[650] hover:text-red-400 transition">+234 803 799 8324</a>
-          <div class="mt-1 text-zinc-400 text-[14px]">WhatsApp • Call • DM</div>
-          <div class="mt-6 text-[13.5px] text-zinc-400">Open daily<br>9:00 AM – 9:00 PM WAT</div>
+          <a href="https://wa.me/2348037998324" target="_blank" class="text-white text-[18px] font-[650] hover:text-[#E30613] transition-colors duration-200 group inline-flex items-center gap-2">
+            <i class="ri-whatsapp-line text-[17px] text-green-400 group-hover:text-[#E30613] transition-colors duration-200"></i>
+            +234 803 799 8324
+          </a>
+          <div class="mt-1 text-zinc-500 text-[13.5px] tracking-wide">WhatsApp • Call • DM</div>
+          <div class="mt-5 text-[13px] text-zinc-500 leading-relaxed border-t border-zinc-800 pt-4">
+            <span class="text-zinc-400 font-[600]">Open daily</span><br>
+            9:00 AM – 9:00 PM WAT
+          </div>
         </div>
 
         <div class="lg:col-span-2">
-          <div class="text-[11.5px] uppercase tracking-widest text-zinc-500 font-[700] mb-3">Quick Links</div>
-          <ul class="space-y-2.5 text-[15px] text-zinc-300">
-            <li><a href="#menu" class="hover:text-white">Menu</a></li>
-            <li><a href="#cakes" class="hover:text-white">Cakes</a></li>
-            <li><a href="#why" class="hover:text-white">Why Us</a></li>
-            <li><a href="https://wa.me/2348037998324" target="_blank" class="hover:text-white">Order</a></li>
+          <div class="text-[11.5px] uppercase tracking-widest text-zinc-500 font-[700] mb-4">Quick Links</div>
+          <ul class="space-y-3 text-[14.5px]">
+            <li>
+              <a href="#menu" class="footer-quick-link">
+                <i class="ri-arrow-right-s-line text-[16px] opacity-0 group-hover:opacity-100 -ml-1 transition-all duration-200"></i>
+                Menu
+              </a>
+            </li>
+            <li>
+              <a href="#cakes" class="footer-quick-link">
+                <i class="ri-arrow-right-s-line text-[16px]"></i>
+                Cakes
+              </a>
+            </li>
+            <li>
+              <a href="#why" class="footer-quick-link">
+                <i class="ri-arrow-right-s-line text-[16px]"></i>
+                Why Us
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/2348037998324" target="_blank" class="footer-quick-link">
+                <i class="ri-arrow-right-s-line text-[16px]"></i>
+                Order Now
+              </a>
+            </li>
           </ul>
         </div>
       </div>
 
-      <div class="border-t border-zinc-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13.5px] text-zinc-500">
+      <div class="border-t border-zinc-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-zinc-600">
         <div>© <span id="year"></span> Ntige Pastries. All rights reserved. Made fresh in Port Harcourt.</div>
         <div class="flex gap-5">
-          <a href="https://www.instagram.com/ntigepastries?igsh=NzBpdXpjZDVvcHBp" target="_blank" class="hover:text-zinc-300">Instagram</a>
-          <a href="https://www.tiktok.com/@ntige.pastries?_r=1&_t=ZS-974JqJ3RTsG" target="_blank" class="hover:text-zinc-300">TikTok</a>
-          <a href="https://wa.me/2348037998324" target="_blank" class="hover:text-zinc-300">WhatsApp</a>
+          <a href="https://www.instagram.com/ntigepastries?igsh=NzBpdXpjZDVvcHBp" target="_blank" class="footer-bottom-link">
+            <i class="ri-instagram-line text-[14px]"></i> Instagram
+          </a>
+          <a href="https://www.tiktok.com/@ntige.pastries?_r=1&_t=ZS-974JqJ3RTsG" target="_blank" class="footer-bottom-link">
+            <i class="ri-tiktok-fill text-[14px]"></i> TikTok
+          </a>
+          <a href="https://wa.me/2348037998324" target="_blank" class="footer-bottom-link">
+            <i class="ri-whatsapp-line text-[14px]"></i> WhatsApp
+          </a>
         </div>
       </div>
     </div>
